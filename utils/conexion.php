@@ -11,11 +11,12 @@ class Conexion
      return mysqli_connect($servername, $username, $password, $dbName);
     }
 
-//    public static function Query($query){
-//        $resultado = mysqli_query(self::DB_Conect(), $query);
+/*    public static function Query2($query){
+        $resultado = mysqli_query(self::DB_Conect(), $query);
 //        $data = mysqli_fetch_object($resultado);
-//        return $data;
-//    }
+          $data = mysqli_fetch_assoc($resultado);
+        return $data;
+    }*/
 
     public static function Insert($query){
         $conexion = self::DB_Conect();
@@ -27,6 +28,8 @@ class Conexion
             die('DB connection error');
         }
     }
+
+    //Usefull with Login
     public static function Query($query){
         $conexion = self::DB_Conect();
         if ($conexion){

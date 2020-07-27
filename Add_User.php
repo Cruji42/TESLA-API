@@ -1,26 +1,34 @@
 <?php
-require "vendor/autoload.php";
-include_once "utils/headers.php";
-use DBC\Conexion as dbc;
+
+include_once 'API_User.php';
 
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-@$Nombre = $request-> nombre;
-@$Apellido = $request-> apellido;
-@$Telefono = $request-> telefono;
-@$Direccion = $request-> direccion;
-@$Ciudad = $request-> ciudad;
-@$Correo = $request-> correo;
-@$Contrasena = $request-> contrasena;
+@$Name = $request-> Name;
+@$LastName = $request-> LastName;
+@$Telephone = $request-> Telephone;
+@$Address = $request-> Address;
+@$City = $request-> City;
+@$Mail = $request-> Mail;
+@$Password = $request-> Password;
+
+$api = new ApiUser();
 
 
+if($Name != '' && $LastName != '' && $Telephone != '' && $Address != '' && $City != '' && $Mail != '' && $Password != ''){
+    $PasswordEn = password_hash($Password, PASSWORD_DEFAULT, ['cost' => 5]);
+    $item = array(
+        'Name' => $Name,
+        'LastName' => $LastName,
+        'Telephone' => $Telephone,
+        'Address' => $Address,
+        'City' => $City,
+        'Mail' => $Mail,
+        'Password' => $PasswordEn,
 
-if($Nombre != '' && $Apellido != '' && $Telefono != '' && $Direccion != '' && $Ciudad != '' && $Correo != '' && $Contrasena != ''){
-    $ContrasenaEn = password_hash($Contrasena, PASSWORD_DEFAULT, ['cost' => 5]);
-    $query = "CALL Agregar_Usuario('".$Nombre."', '".$Apellido."', '".$Telefono."', '".$Direccion."', '".$Ciudad."', '".$Correo."', '".$ContrasenaEn."')";
-    dbc::Query($query);
+    );
+    $api->addUser($item);
 }else{
-    echo json_encode('Faltaron datos');
+    $api->error('Data incomplete');
 }
-

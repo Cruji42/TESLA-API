@@ -13,10 +13,10 @@ $request = json_decode($postdata);
 if($Correo != '' && $Contrasena != ''){
     $query = " select * from usuario where correo= '".$Correo."'";
     $result = dbc::Query($query);
-    if(password_verify($Contrasena, $result->Contrasena)) {
+    if(password_verify($Contrasena, $result[0]['Contrasena'])) {
         $tokenData = [
-            'id' => $result-> Id,
-            'name' => $result -> Nombre,
+            'id' => $result[0]['Id'],
+            'name' => $result[0]['Nombre'],
         ];
         $token = Token::TokenGenerate($tokenData);
         $data=['success' => 1, 'token' => $token];

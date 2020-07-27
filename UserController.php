@@ -1,6 +1,7 @@
 <?php
 namespace Controller;
 include_once 'API_User.php';
+
 class UserController {
     private $requestMethod;
     private $userId;
@@ -74,34 +75,6 @@ public function createUserFromRequest()
         return true;
     }
 
-//private function updateUserFromRequest($id)
-//{
-//    $result = $this->personGateway->find($id);
-//    if (! $result) {
-//        return $this->notFoundResponse();
-//    }
-//    $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-//    if (! $this->validatePerson($input)) {
-//        return $this->unprocessableEntityResponse();
-//    }
-//    $this->personGateway->update($id, $input);
-//    $response['status_code_header'] = 'HTTP/1.1 200 OK';
-//    $response['body'] = null;
-//    return $response;
-//}
-//
-
-//private function deleteUser($id)
-//{
-//    $result = $this->personGateway->find($id);
-//    if (! $result) {
-//        return $this->notFoundResponse();
-//    }
-//    $this->personGateway->delete($id);
-//    $response['status_code_header'] = 'HTTP/1.1 200 OK';
-//    $response['body'] = null;
-//    return $response;
-//}
 
 private function unprocessableEntityResponse()
 {
