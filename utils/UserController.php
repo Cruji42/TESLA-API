@@ -1,7 +1,7 @@
 <?php
 namespace Controller;
 use USR\User;
-include_once 'utils/User.php';
+include_once 'User.php';
 
 class UserController {
     public function processRequest($requestMethod, $userId) {

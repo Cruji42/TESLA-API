@@ -1,7 +1,7 @@
 <?php
 namespace PController;
 use PDT\Product;
-include_once 'utils/Product.php';
+include_once 'Product.php';
 
 class ProductController {
     public function processRequest($requestMethod, $productId) {
