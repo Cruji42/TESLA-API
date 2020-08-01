@@ -1,29 +1,29 @@
 <?php
-namespace Controller;
-use USR\User;
-include_once 'utils/User.php';
+namespace PController;
+use PDT\Product;
+include_once 'utils/Product.php';
 
-class UserController {
-    public function processRequest($requestMethod, $userId) {
+class ProductController {
+    public function processRequest($requestMethod, $productId) {
         switch ($requestMethod) {
 //        already working
             case 'GET':
-                if ($userId != null) {
-                    $response = $this->getUser($userId);
+                if ($productId != null) {
+                    $response = $this->getProduct($productId);
                 } else {
-                    $response = $this->getAllUsers();
+                    $response = $this->getAllProducts();
                 };
                 break;
 //        already working
             case 'POST':
-                $response = $this->createUserFromRequest();
+                $response = $this->createProductFromRequest();
                 break;
             case 'PUT':
-                $response = $this->updateUserFromRequest($userId);
+                $response = $this->updateUserFromRequest($productId);
                 break;
 //        already working
             case 'DELETE':
-                $response = $this->deleteUser($userId);
+                $response = $this->deleteProduct($productId);
                 break;
             default:
                 $response = $this->notFoundResponse();
@@ -32,18 +32,18 @@ class UserController {
         echo json_encode($response);
     }
 
-    public function getAllUsers()
+    public function getAllProducts()
     {
-        $result = User::getUsers();
+        $result = Product::getProducts();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         $response['body']=$result;
         return $response;
     }
 
-    public function getUser($id)
+    public function getProduct($id)
     {
-        $result = User::getSingleUser($id);
+        $result = Product::getSingleProduct($id);
         if (! $result) {
             return $this->notFoundResponse();
         }
@@ -51,9 +51,9 @@ class UserController {
         $response['body'] = $result;
         return $response;
     }
-    public function deleteUser($id)
+    public function deleteProduct($id)
     {
-        $result = User::deleteUser($id);
+        $result = Product::deleteUser($id);
         if (! $result) {
             return $this->notFoundResponse();
         }
@@ -62,22 +62,23 @@ class UserController {
         return $response;
     }
 
-    public function createUserFromRequest()
+    public function createProductFromRequest()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (! $this->validatePerson($input)) {
+        if (! $this->validateProduct($input)) {
             return $this->unprocessableEntityResponse();
         }
-        User::addUser($input);
+        Product::addProduct($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Deleted';
         $response['body'] = null;
         return $response;
     }
 
-    private function validatePerson($input)
+    private function validateProduct($input)
     {
-        if (! isset($input['Name']) || ! isset($input['LastName']) || ! isset($input['Telephone']) ||
-            ! isset($input['Address']) || ! isset($input['City']) || ! isset($input['Mail']) || ! isset($input['Password']) ) {
+        if (! isset($input['Name']) || ! isset($input['Description']) || ! isset($input['Image']) ||
+            ! isset($input['Price']) || ! isset($input['FlavorId']) || ! isset($input['SizeId']) || ! isset($input['FillId'])
+            || ! isset($input['ConfigurationId']) || ! isset($input['ShapeId']) ) {
             return false;
         }
         return true;
