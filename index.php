@@ -6,6 +6,9 @@ include_once 'utils/UserController.php';
 use PController\ProductController;
 include_once 'utils/ProductController.php';
 
+use ORDController\OrderController;
+include_once 'utils\OrderController.php';
+
 include_once 'utils/headers.php';
 
 //get the name of the archive clean
@@ -31,6 +34,15 @@ switch ($URL){
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $controller = new ProductController();
         $controller->processRequest($requestMethod, $productId);
+        break;
+
+    case 'ORDER':
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
+        @$Id = $request-> id;
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+        $controller = new OrderController();
+        $controller->processRequest($requestMethod, $Id);
         break;
 
 };
