@@ -4,18 +4,24 @@ namespace ORD;
 include_once ("headers.php");
 use DBC\Conexion as dbc;
 include_once 'conexion.php';
+
 class Order {
 
     public static function add($Product){
-        $Fecha = date_format(date_create($Product['FechaEntrega']), "Y/m/d H:i:S");
+
+
         $Cliente = $Product['ClienteId'];
-        $Producto = $Product['ProductoID'];
+        $Fecha = date_format(date_create($Product['FechaEntrega']), "Y/m/d H:i:S");
         $Cantidad = $Product['ProductoCant'];
         $Importe = $Product['ProductImporte'];
         $Decoracion = $Product['ProductoDecoracion'];
+        $Tamano = $Product['ProductoTamano'];
+        $Sabor = $Product['ProductoSabor'];
+        $Relleno = $Product['ProductoRelleno'];
+        $Extra = $Product['ProductoExtra'];
 
 
-        $query = "CALL Crear_Orden('$Fecha', '$Cliente', '$Producto', '$Cantidad', '$Importe', '$Decoracion')";
+        $query = "CALL Crear_Orden('$Fecha', '$Cliente', '$Cantidad', '$Importe', '$Decoracion', '$Tamano', '$Sabor', '$Relleno', '$Extra')";
         $response = dbc::Insert($query);
         return $response;
     }

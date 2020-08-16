@@ -10,13 +10,20 @@ class UserController {
             case 'GET':
                 if ($userId != null) {
                     $response = $this->getUser($userId);
-                } else {
+//                }elseif ($userEmail != null){
+//                    $response = $this->passwordRecovery($userEmail);
+
+            } else {
                     $response = $this->getAllUsers();
                 };
                 break;
 //        already working
             case 'POST':
-                $response = $this->createUserFromRequest();
+                if($userId != null){
+                 $response = $this->getUser($userId);
+                }else{
+                    $response = $this->createUserFromRequest();
+                }
                 break;
             case 'PUT':
                 $response = $this->updateUserFromRequest($userId);
@@ -36,7 +43,7 @@ class UserController {
     {
         $result = User::getUsers();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
+        $response['body'] = $result;
         $response['body']=$result;
         return $response;
     }
@@ -49,6 +56,16 @@ class UserController {
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = $result;
+        $response = $result;
+        return $response;
+    }
+    public function passwordRecovery($email)
+    {
+        $result = User::getPassword($email);
+        if (! $result) {
+            return $this->notFoundResponse();
+        }
+        $response = $result;
         return $response;
     }
     public function deleteUser($id)
@@ -69,18 +86,18 @@ class UserController {
             return $this->unprocessableEntityResponse();
         }
         User::addUser($input);
-        $response['status_code_header'] = 'HTTP/1.1 201 Deleted';
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
         return $response;
     }
 
     private function validatePerson($input)
     {
-        if (! isset($input['Name']) || ! isset($input['LastName']) || ! isset($input['Telephone']) ||
-            ! isset($input['Address']) || ! isset($input['City']) || ! isset($input['Mail']) || ! isset($input['Password']) ) {
-            return false;
+        if ($input['Name'] != "" && $input['LastName'] != "" && $input['Telephone'] != "" && $input['Address'] != "" &&
+        $input['City'] != "" && $input['Mail'] != "" && $input['Password'] != "" ) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 

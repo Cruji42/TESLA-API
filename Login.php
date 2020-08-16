@@ -19,7 +19,7 @@ if($Correo != '' && $Contrasena != ''){
             'name' => $result[0]['Nombre'],
         ];
         $token = Token::TokenGenerate($tokenData);
-        $data=['success' => 1, 'token' => $token];
+        $data=['success' => 1, 'token' => $token, 'id' => $result[0]['Id']];
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }else{
         echo json_encode('Error de Autenticación');

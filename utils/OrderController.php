@@ -16,7 +16,11 @@ class OrderController {
                 break;
 //        already working
             case 'POST':
-                $response = $this->createOrdersFromRequest();
+                if($Id != null){
+                    $response = $this->getOrders($Id);
+                }else{
+                    $response = $this->createOrdersFromRequest();
+                }
                 break;
             case 'PUT':
                 $response = $this->updateOrdersFromRequest($Id);
@@ -35,7 +39,7 @@ class OrderController {
     public function getAllOrders()
     {
         $result = Order::get();
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+//        $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         $response['body']=$result;
         return $response;
@@ -47,8 +51,9 @@ class OrderController {
         if (! $result) {
             return $this->notFoundResponse();
         }
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = $result;
+//        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+//        $response['body'] = $result;
+        $response = $result;
         return $response;
     }
     public function deleteOrders($id)
@@ -76,8 +81,12 @@ class OrderController {
 
     private function validateOrder($input)
     {
-        if (! isset($input['FechaEntrega']) || ! isset($input['ClienteId']) || ! isset($input['ProductoID']) ||
-            ! isset($input['ProductoCant']) || ! isset($input['ProductImporte']) || ! isset($input['ProductoDecoracion'])) {
+        if (! isset($input['FechaEntrega']) || ! isset($input['ClienteId']) ||
+            ! isset($input['ProductoCant']) || ! isset($input['ProductImporte'])
+            || ! isset($input['ProductoDecoracion']) || ! isset($input['ProductoTamano'])
+            || ! isset($input['ProductoSabor']) || ! isset($input['ProductoRelleno'])
+            || ! isset($input['ProductoExtra'])
+        ) {
             return false;
         }
         return true;

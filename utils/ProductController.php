@@ -35,9 +35,9 @@ class ProductController {
     public function getAllProducts()
     {
         $result = Product::getProducts();
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        $response['body']=$result;
+//        $response['status_code_header'] = 'HTTP/1.1 200 OK';
+//        $response['body'] = json_encode($result);
+        $response=$result;
         return $response;
     }
 
