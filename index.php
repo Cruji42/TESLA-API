@@ -40,9 +40,10 @@ switch ($URL){
         $postdata = file_get_contents("php://input");
         $request = json_decode($postdata);
         @$Id = $request-> id;
+        @$id_order = $request-> id_order;
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $controller = new OrderController();
-        $controller->processRequest($requestMethod, $Id);
+        $controller->processRequest($requestMethod, $Id, $id_order);
         break;
 
 };

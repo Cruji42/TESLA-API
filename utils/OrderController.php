@@ -4,7 +4,7 @@ use ORD\Order;
 include_once 'Order.php';
 
 class OrderController {
-    public function processRequest($requestMethod, $Id) {
+    public function processRequest($requestMethod, $Id, $id_order) {
         switch ($requestMethod) {
 //        already working
             case 'GET':
@@ -18,6 +18,8 @@ class OrderController {
             case 'POST':
                 if($Id != null){
                     $response = $this->getOrders($Id);
+                } elseif($Id == null && $id_order ){
+                    $response = $this->deleteOrders($id_order);
                 }else{
                     $response = $this->createOrdersFromRequest();
                 }
