@@ -41,7 +41,27 @@ class Order {
     public static function delete($param){
         $id = $param;
         $query = "call eliminarOrden('$id')";
-        $response = dbc::Query($query);
+        dbc::Insert($query);
+        return "ok";
+    }
+
+    public static function update($Product){
+
+
+        $Cliente = $Product['ClienteId'];
+        $Fecha = date_format(date_create($Product['FechaEntrega']), "Y-m-d H:i:s");
+        $Cantidad = $Product['ProductoCant'];
+        $Importe = $Product['ProductImporte'];
+        $Decoracion = $Product['ProductoDecoracion'];
+        $Tamano = $Product['ProductoTamano'];
+        $Sabor = $Product['ProductoSabor'];
+        $Relleno = $Product['ProductoRelleno'];
+        $Extra = $Product['ProductoExtra'];
+
+
+        $query = "CALL Crear_Orden('$Fecha', '$Cliente', '$Cantidad', '$Importe', '$Decoracion', '$Tamano', '$Sabor', '$Relleno', '$Extra')";
+        $query = "UPDATE orden set FechaEntrega = '$Fecha',  ";
+        $response = dbc::Insert($query);
         return $response;
     }
 

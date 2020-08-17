@@ -78,6 +78,17 @@ class OrderController {
         $response['body'] = $query;
         return $response;
     }
+    public function updateOrdersFromRequest()
+    {
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validateOrder($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $query = Order::add($input);
+        $response['status_code_header'] = 'HTTP/1.1 201 Updated';
+        $response['body'] = $query;
+        return $response;
+    }
 
     private function validateOrder($input)
     {
