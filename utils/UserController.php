@@ -85,9 +85,9 @@ class UserController {
         if (! $this->validatePerson($input)) {
             return $this->unprocessableEntityResponse();
         }
-        User::addUser($input);
+        $result = User::addUser($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        $response['body'] = null;
+        $response['body'] = $result;
         return $response;
     }
 
