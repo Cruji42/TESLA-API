@@ -17,22 +17,18 @@ if($Correo != '' && $Contrasena != ''){
     if ($result[0] == 'empty'){
         echo json_encode('Usuario incorrecto');
     }else{
-            if(password_verify($Contrasena, $result[0]['Contrasena'])) {
-        $tokenData = [
-            'id' => $result[0]['Id'],
-            'name' => $result[0]['Nombre'],
-        ];
-        $token = Token::TokenGenerate($tokenData);
-        $data=['success' => 1, 'token' => $token, 'id' => $result[0]['Id']];
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-    }else{
-        echo json_encode('Error de contraseña');
-    }
+        if(password_verify($Contrasena, $result[0]['Contrasena'])) {
+            $tokenData = [
+                'id' => $result[0]['Id'],
+                'name' => $result[0]['Nombre'],
+            ];
+            $token = Token::TokenGenerate($tokenData);
+            $data=['success' => 1, 'token' => $token, 'id' => $result[0]['Id']];
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        }else{
+            echo json_encode('Error de contraseña');
+        }
     }
 }else{
     echo json_encode('Llena todos los campos');
 }
-
-
-
-
