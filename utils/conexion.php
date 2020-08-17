@@ -33,10 +33,11 @@ class Conexion
     public static function Query($query){
         $conexion = self::DB_Conect();
         if ($conexion){
+            $arreglo[] = "empty";
             mysqli_set_charset($conexion,"utf8");
             if (! $result = mysqli_query($conexion, $query)) die();
             while($data = mysqli_fetch_assoc($result)){
-                $arreglo[] = $data;
+                $arreglo[0] = $data;
             }
             return $arreglo;
 
