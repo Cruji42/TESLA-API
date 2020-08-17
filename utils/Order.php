@@ -40,7 +40,7 @@ class Order {
     }
     public static function delete($param){
         $id = $param;
-        $query = "Delete from orden where Id = $id";
+        $query = "call eliminarOrden('$id')";
         $response = dbc::Query($query);
         return $response;
     }
