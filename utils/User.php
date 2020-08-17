@@ -93,6 +93,7 @@ class User {
 
         return $response;
     }*/
+
     public static function deleteUser($param){
         $id = $param;
         $query = "Delete from usuario where Id = $id";

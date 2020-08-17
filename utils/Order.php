@@ -11,7 +11,7 @@ class Order {
 
 
         $Cliente = $Product['ClienteId'];
-        $Fecha = date_format(date_create($Product['FechaEntrega']), "Y/m/d H:i:S");
+        $Fecha = date_format(date_create($Product['FechaEntrega']), "Y-m-d H:i:s");
         $Cantidad = $Product['ProductoCant'];
         $Importe = $Product['ProductImporte'];
         $Decoracion = $Product['ProductoDecoracion'];
