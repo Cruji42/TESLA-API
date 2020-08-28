@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2919d00a-d9a9-4c19-9dbf-9ca0fb24a16a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/LAINNE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CARS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/lainne_db.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Get_Best_Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/get_Stores.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/conexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/utils/conexion.php" afterDir="false" />
-    </list>
+    <list default="true" id="2919d00a-d9a9-4c19-9dbf-9ca0fb24a16a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,12 +116,12 @@
       <option name="presentableId" value="Default" />
       <updated>1598480976249</updated>
       <workItem from="1598480978223" duration="5664000" />
-      <workItem from="1598574262297" duration="1008000" />
+      <workItem from="1598574262297" duration="1272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6672000" />
+    <option name="totallyTimeSpent" value="6936000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
