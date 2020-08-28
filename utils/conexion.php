@@ -7,7 +7,7 @@ class Conexion
      $servername = 'localhost';
      $username = 'root';
      $password = '';
-     $dbName = 'lainne_db';
+     $dbName = 'cars';
      return mysqli_connect($servername, $username, $password, $dbName);
     }
 
@@ -38,7 +38,7 @@ class Conexion
             if (! $result = mysqli_query($conexion, $query)) die();
             while($data = mysqli_fetch_assoc($result)){
                 $arreglo[] = $data;
-                $arreglo[0] = $data;
+//                $arreglo[0] = $data;
             }
             return $arreglo;
 

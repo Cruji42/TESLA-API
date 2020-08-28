@@ -23,20 +23,20 @@ class Product {
     }
 
     public static function getProducts(){
-        $query = "SELECT * FROM producto";
+        $query = "SELECT * FROM products";
         $response = dbc::Query($query);
         return $response;
     }
 
     public static function getSingleProduct($param){
         $id = $param;
-        $query = "Select * from producto where Id = $id";
+        $query = "Select * from products where id = $id";
         $response = dbc::Query($query);
         return $response;
     }
     public static function deleteUser($param){
         $id = $param;
-        $query = "Delete from producto where Id = $id";
+        $query = "Delete from products where id = $id";
         $response = dbc::Query($query);
         return $response;
     }
