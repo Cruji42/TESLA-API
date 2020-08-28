@@ -13,11 +13,8 @@ $request = json_decode($postdata);
 if($Correo != '' && $Contrasena != ''){
     $query = " select * from users where email= '".$Correo."'";
     $result = dbc::Query($query);
-//   echo json_encode($result);
-    if ($result[0] == 'empty'){
-        echo json_encode('Usuario incorrecto');
-    }else{
-        if(password_verify($Contrasena, $result[0]['password'])) {
+
+      if(password_verify($Contrasena, $result[0]['password'])) {
             $tokenData = [
                 'id' => $result[0]['id'],
                 'name' => $result[0]['nickname'],
@@ -27,9 +24,8 @@ if($Correo != '' && $Contrasena != ''){
             $data=['success' => 1, 'token' => $token, 'id' => $result[0]['id']];
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }else{
-            echo json_encode('Error de contraseña');
+            echo json_encode('Usuario o contraseña incorrecto');
         }
-    }
 }else{
     echo json_encode('Llena todos los campos');
 }
