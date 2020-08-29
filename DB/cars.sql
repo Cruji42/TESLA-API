@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2020 at 02:56 AM
+-- Generation Time: Aug 29, 2020 at 03:56 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
+  `name` varchar(45) NOT NULL,
   `price` double DEFAULT NULL,
   `model` varchar(45) DEFAULT NULL,
   `image` varchar(500) DEFAULT NULL
@@ -135,11 +135,11 @@ INSERT INTO `sales` (`id`, `date`, `amount`, `products_id`) VALUES
 
 CREATE TABLE `stores` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
   `city` varchar(100) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `schedule` varchar(45) DEFAULT NULL,
-  `image` varchar(500) DEFAULT 'https://content.fortune.com/wp-content/uploads/2015/05/tesla-pop-up-store.jpg'
+  `image` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -158,6 +158,31 @@ INSERT INTO `stores` (`id`, `name`, `city`, `address`, `schedule`, `image`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `id` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `state` enum('Aceptada','Rechazada','Solicitada') DEFAULT 'Solicitada',
+  `users_id` int(11) NOT NULL,
+  `products_id` int(11) NOT NULL,
+  `stores_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`id`, `date`, `state`, `users_id`, `products_id`, `stores_id`) VALUES
+(1, '2020-08-08 19:47:00', 'Solicitada', 1, 1, 1),
+(4, '2020-07-29 20:49:00', 'Solicitada', 1, 3, 2),
+(5, '2020-08-08 20:49:00', 'Solicitada', 1, 4, 7),
+(6, '2020-10-20 20:50:00', 'Solicitada', 1, 2, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -165,9 +190,16 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `nickname` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
   `access` int(11) DEFAULT '100'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `nickname`, `email`, `password`, `access`) VALUES
+(1, 'Edgar Mora', 'cruji42@gmail.com', '$2y$05$znOPv1uWt3nTR03WqczBHOrqs/CXNWkIdZrVRfGkydB4gd3dfcEDW', 100);
 
 --
 -- Indexes for dumped tables
@@ -191,6 +223,15 @@ ALTER TABLE `sales`
 --
 ALTER TABLE `stores`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`id`,`users_id`,`products_id`,`stores_id`),
+  ADD KEY `fk_test_users1_idx` (`users_id`),
+  ADD KEY `fk_test_products1_idx` (`products_id`),
+  ADD KEY `fk_test_stores1_idx` (`stores_id`);
 
 --
 -- Indexes for table `users`
@@ -223,10 +264,16 @@ ALTER TABLE `stores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `test`
+--
+ALTER TABLE `test`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -237,6 +284,14 @@ ALTER TABLE `users`
 --
 ALTER TABLE `sales`
   ADD CONSTRAINT `fk_sales_products` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `test`
+--
+ALTER TABLE `test`
+  ADD CONSTRAINT `fk_test_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_test_stores1` FOREIGN KEY (`stores_id`) REFERENCES `stores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_test_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
