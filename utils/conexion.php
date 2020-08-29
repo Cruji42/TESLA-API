@@ -39,5 +39,21 @@ class Conexion
             die(error);
         }
     }
+    public static function Query2($query){
+        $conexion = self::DB_Conect();
+        if ($conexion){
+//            $arreglo[] = "empty";
+            mysqli_set_charset($conexion,"utf8");
+            if (! $result = mysqli_query($conexion, $query)) die();
+            while($data = mysqli_fetch_row($result)){
+                $arreglo[] = $data;
+//                $arreglo[0] = $data;
+            }
+            return $arreglo;
+
+        }else{
+            die(error);
+        }
+    }
 
 }

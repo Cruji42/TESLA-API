@@ -20,14 +20,14 @@ $post = json_decode($postdata);
 $password = generateRandomString();
 
 if($usuario != ''){
-    $query = " select * from usuario where correo= '".$usuario."'";
+    $query = " select * from users where email = '".$usuario."'";
     $result = dbc::Query($query);
 //   echo json_encode($result);
     if ($result[0] == 'empty'){
         echo json_encode('Usuario no existe');
     }else{
         $encrypt = password_hash($password, PASSWORD_DEFAULT, ['cost' => 5]);
-        dbc::insert("UPDATE usuario SET Contrasena = '$encrypt' where correo = '$usuario'");
+        dbc::insert("UPDATE users SET password = '$encrypt' where email = '$usuario'");
         }
 }else{
     echo json_encode('Llena todos los campos');
@@ -46,7 +46,7 @@ try {
     $mail->SMTPAutoTLS = true;
 
     //Recipients
-    $mail->setFrom('from@example.com', 'Mailer');
+    $mail->setFrom('from@example.com', 'Tesla');
     $mail->addAddress($usuario, '');     // Add a recipient
     #$mail->addAddress('ellen@example.com');               // Name is optional
     #$mail->addReplyTo('info@example.com', 'Information');

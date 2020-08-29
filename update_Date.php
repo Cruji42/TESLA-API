@@ -11,12 +11,12 @@ $request = json_decode($postdata);
 
 if($Option != '' && $Id != ''){
     if($Option == 'A'){
-        $query = "UPDATE TABLE test set state = 'Aceptada' where id= '$Id'";
-        $result = dbc::Query($query);
+        $query = "UPDATE test set state = 'Aceptada' where id= '$Id'";
+        $result = dbc::Insert($query);
         echo json_encode($result);
     }else if ($Option == 'B'){
-        $query = "UPDATE TABLE test set state = 'Rechazada' where id= '$Id'";
-        $result = dbc::Query($query);
+        $query = "UPDATE test set state = 'Rechazada' where id= '$Id'";
+        $result = dbc::Insert($query);
         echo json_encode($result);
 
     }else{
