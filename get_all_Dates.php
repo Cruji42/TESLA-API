@@ -11,8 +11,7 @@ ON t1.products_id = t2.id
 JOIN stores as t3
 ON t1.stores_id = t3.id
 JOIN users as t4 
-ON t1.users_id = t4.id
-WHERE t4.id = '$User'";
+ON t1.users_id = t4.id";
 
 $result = dbc::Query($query);
 echo json_encode($result);
