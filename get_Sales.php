@@ -9,3 +9,4 @@ $result = dbc::Query($query);
 echo json_encode($result);
 
 
+
